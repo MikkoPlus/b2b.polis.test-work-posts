@@ -1,3 +1,3 @@
-[submodule "b2b.polis.test-work-posts-front"]
-	path = b2b.polis.test-work-posts-front
+[submodule "front"]
+	path = front
 	url = git@github.com:MikkoPlus/b2b.polis.test-work-posts-front.git
