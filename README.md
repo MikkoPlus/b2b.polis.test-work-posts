@@ -36,6 +36,14 @@
 
 ## Запуск через Docker
 
+### 0. Клонирование репозитория
+
+В проекте используются git submodules, поэтому для корректного клонирования репозитория используйте команду
+
+```bash
+  git clone --recurse-submodules git@github.com:MikkoPlus/b2b.polis.test-work-posts.git
+```
+
 ### 1. Подготовка `.env` для Laravel
 
 В папке `back`:
