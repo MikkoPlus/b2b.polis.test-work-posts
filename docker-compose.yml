@@ -11,6 +11,8 @@ services:
       - ./back:/var/www
     depends_on:
       - db
+    command: >
+      sh -c "if [ ! -f storage/.migrated ]; then php artisan migrate --force && php artisan db:seed --force && touch storage/.migrated; fi && php-fpm"
     networks:
       - appnet
 
@@ -23,6 +25,8 @@ services:
     command: sh -c "npm install && npm run dev -- --host"
     ports:
       - "5173:5173"
+    depends_on:
+      - app
     networks:
       - appnet
 
