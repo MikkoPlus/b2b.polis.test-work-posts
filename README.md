@@ -38,13 +38,17 @@
 
 ### 0. Клонирование репозитория
 
-В проекте используются git submodules, поэтому для корректного клонирования репозитория используйте команду
+В проекте используются git submodules, поэтому для корректного клонирования репозитория и установки основной ветки используйте команду
 
 ```bash
   git clone --recurse-submodules git@github.com:MikkoPlus/b2b.polis.test-work-posts.git
+  cd b2b.polis.test-work-posts
+  git submodule foreach 'git checkout main && git pull'
 ```
 
-### 1. Подготовка `.env` для Laravel
+### 1. Подготовка
+
+#### 1.1 Подготовка `.env` для Laravel
 
 В папке `back`:
 
@@ -67,11 +71,24 @@ SESSION_DRIVER=file
 QUEUE_CONNECTION=sync
 ```
 
+Установите пакеты composer
+
+```bash
+composer install
+```
+
 Сгенерируйте ключ приложения:
 
 ```bash
-cd back
 php artisan key:generate
+```
+
+#### 1.2 Подготовка `.env` для react
+
+В папке `front`:
+
+```bash
+touch .env && echo "VITE_API_URL=http://localhost:8000" > .env
 ```
 
 ### 2. Запуск контейнеров
@@ -114,9 +131,9 @@ php artisan bd:seed
 ```bash
 cd back
 cp .env.example .env
-php artisan key:generate
-
 composer install
+
+php artisan key:generate
 php artisan migrate
 php artisan serve
 ```
@@ -141,12 +158,13 @@ QUEUE_CONNECTION=sync
 ```bash
 cd front
 npm install
+touch .env && echo "VITE_API_URL=http://localhost:8000" > .env
 npm run dev
 ```
 
 ---
 
-## Рабочее мини приложение доступно по адресу http://45.12.130.231:8000
+## Рабочее мини приложение доступно по адресу http://45.12.130.231:5173
 
 ---
 
