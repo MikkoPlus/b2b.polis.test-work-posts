@@ -12,7 +12,11 @@ services:
     depends_on:
       - db
     command: >
-      sh -c "if [ ! -f storage/.migrated ]; then php artisan migrate --force && php artisan db:seed --force && touch storage/.migrated; fi && php-fpm"
+      sh -c "echo 'Waiting DB...' && sleep 10 &&
+      if [ ! -f storage/.migrated ]; then
+      php artisan migrate --force && php artisan db:seed --force && touch storage/.migrated;
+      fi &&
+      php-fpm"
     networks:
       - appnet
 
